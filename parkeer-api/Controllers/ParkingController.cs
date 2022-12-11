@@ -7,19 +7,24 @@ namespace parkeer_api.Controllers
     [ApiController]
     public class ParkingController : ControllerBase
     {
-        MockParkingRepo _repo = new MockParkingRepo();
+        private readonly IParkingRepo _repo;
+
+        public ParkingController(IParkingRepo repo)
+        {
+            _repo = repo; 
+        }
         // GET: api/<ParkingController>
         [HttpGet]
         public ActionResult Get()
         {
-            return Ok(_repo.getParkings());
+            return Ok(_repo.GetParkings());
         }
 
         // GET api/<ParkingController>/5
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
-            return Ok(_repo.getParkingById(id));
+            return Ok(_repo.GetParkingById(id));
         }
 
         // POST api/<ParkingController>
