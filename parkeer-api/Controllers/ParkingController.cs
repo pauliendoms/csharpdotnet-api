@@ -1,25 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using parkeer_api.Repositories;
 
 namespace parkeer_api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/parking")]
     [ApiController]
     public class ParkingController : ControllerBase
     {
+        MockParkingRepo _repo = new MockParkingRepo();
         // GET: api/<ParkingController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_repo.getParkings());
         }
 
         // GET api/<ParkingController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult Get(int id)
         {
-            return "value";
+            return Ok(_repo.getParkingById(id));
         }
 
         // POST api/<ParkingController>
