@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using parkeer_api.Contexts;
 using parkeer_api.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +11,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IParkingRepo, MockParkingRepo>();
+builder.Services.AddScoped<IParkingRepo, ParkingRepo>();
+
+String _constr = builder.Configuration["ConnectionString:DefaultConnection"];
+
+builder.Services.AddDbContext<ParkingContext>(opt => opt.UseMySql(_constr, ServerVersion.AutoDetect(_constr)));
 
 var app = builder.Build();
 
