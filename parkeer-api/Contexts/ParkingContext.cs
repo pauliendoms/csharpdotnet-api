@@ -11,5 +11,7 @@ namespace parkeer_api.Contexts
         }
         public DbSet<Parking> parkings { get; set; }
 
+        public DbSet<Stad> steden { get; set; }
+
     }
 }

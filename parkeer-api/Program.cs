@@ -13,9 +13,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IParkingRepo, ParkingRepo>();
 
-String _constr = builder.Configuration["ConnectionString:DefaultConnection"];
+String _constr = builder.Configuration["ConnectionStrings:DefaultConnection"];
 
 builder.Services.AddDbContext<ParkingContext>(opt => opt.UseMySql(_constr, ServerVersion.AutoDetect(_constr)));
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
