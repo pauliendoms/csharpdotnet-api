@@ -1,11 +1,9 @@
-﻿namespace parkeer_api
+namespace parkeer_api.Dto
 {
-    public class Parking
+    public class ParkingWriteDto
     {
-        public int id { get; set; }
         public int capacity { get; set; }
         public int free_spaces { get; set; }
         public int city_id { get; set; }
-
     }
 }

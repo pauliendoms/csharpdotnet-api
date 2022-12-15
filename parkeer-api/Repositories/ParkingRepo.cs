@@ -20,6 +20,16 @@ namespace parkeer_api.Repositories
         {
             return _context.parkings.FirstOrDefault<Parking>(t => t.id == i);
         }
+
+        public void AddParking(Parking parking)
+        {
+            _context.parkings.Add(parking);
+        }
+
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
     }
 
 }

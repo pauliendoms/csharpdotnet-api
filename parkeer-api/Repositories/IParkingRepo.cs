@@ -4,5 +4,8 @@
     {
         IEnumerable<Parking> GetParkings();
         Parking GetParkingById(int id);
+
+        void AddParking(Parking parking);
+        void SaveChanges();
     }
 }

@@ -12,6 +12,7 @@ namespace parkeer_api.Mappings
         public ParkingProfile()
         {
             CreateMap<Parking, ParkingReadDto>();
+            CreateMap<ParkingWriteDto, Parking>();
         }
     }
 }

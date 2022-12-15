@@ -33,8 +33,14 @@ namespace parkeer_api.Controllers
 
         // POST api/<ParkingController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult AddParking(ParkingWriteDto p)
         {
+            var parking = _map.Map<Parking>(p);
+
+            _repo.AddParking(parking);
+            _repo.SaveChanges();
+
+            return Ok(parking);
         }
 
         // PUT api/<ParkingController>/5
