@@ -78,5 +78,21 @@ namespace parkeer_api.Controllers
 
             return Ok();
         }
+
+        [HttpGet("{id:int}/parkeer")]
+        public ActionResult Parkeer(int id)
+        {
+            var parking = _repo.GetParkingById(id);
+            if (parking == null) {
+                return NotFound();
+            }
+
+            parking.free_spaces -= 1;
+
+            _repo.UpdateParking(parking);
+            _repo.SaveChanges();
+
+            return Ok(parking);
+        }
     }
 }
