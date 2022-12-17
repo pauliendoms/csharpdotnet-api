@@ -94,5 +94,21 @@ namespace parkeer_api.Controllers
 
             return Ok(parking);
         }
+
+        [HttpGet("{id}/vertrek")]
+        public ActionResult Vertrek(int id)
+        {
+            var parking = _repo.GetParkingById(id);
+            if (parking == null) {
+                return NotFound();
+            }
+
+            parking.free_spaces += 1;
+
+            _repo.UpdateParking(parking);
+            _repo.SaveChanges();
+
+            return Ok(parking);
+        }
     }
 }
