@@ -51,14 +51,17 @@ namespace parkeer_api.Controllers
         [HttpPut("{id}")]
         public ActionResult<Parking> Put(int id, ParkingWriteDto p)
         {
-            var parking = _map.Map<Parking>(p);
-            
-            parking.id = id;
+            var existing = _repo.GetParkingById(id);
+            if(existing == null) {
+                return NotFound();
+            }
 
-            _repo.UpdateParking(parking);
+            _map.Map(p, existing);
+
+            _repo.UpdateParking(existing);
             _repo.SaveChanges();
 
-            return Ok(parking);
+            return Ok(existing);
         }
 
         // DELETE api/<ParkingController>/5

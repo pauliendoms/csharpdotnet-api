@@ -33,7 +33,7 @@ namespace parkeer_api.Repositories
 
         public void UpdateParking(Parking parking)
         {
-            _context.parkings.Update(parking);
+            
         }
 
         public void DeleteParking(Parking parking)

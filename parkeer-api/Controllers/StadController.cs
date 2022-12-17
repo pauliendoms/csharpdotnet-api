@@ -53,14 +53,17 @@ namespace parkeer_api.Controllers
         [HttpPut("{id}")]
         public ActionResult<Stad> Put(int id, StadWriteDto s)
         {
-            var stad = _map.Map<Stad>(s);
+            var existing = _repo.GetStadById(id);
+            if(existing == null) {
+                return NotFound();
+            }
 
-            stad.id = id;
+            _map.Map(s, existing);
 
-            _repo.UpdateStad(stad);
+            _repo.UpdateStad(existing);
             _repo.SaveChanges();
 
-            return Ok(stad);
+            return Ok(existing);
         }
 
         // DELETE api/<StadController>/5

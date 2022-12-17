@@ -37,7 +37,6 @@ namespace parkeer_api.Repositories
 
         public void UpdateStad(Stad stad)
         {
-            _context.steden.Update(stad);
         }
     }
 }
