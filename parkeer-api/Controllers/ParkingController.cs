@@ -25,34 +25,55 @@ namespace parkeer_api.Controllers
         }
 
         // GET api/<ParkingController>/5
-        [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        [HttpGet("{id}", Name="GetParkingById")]
+        public ActionResult GetParkingById(int id)
         {
-            return Ok(_map.Map<ParkingReadDto>(_repo.GetParkingById(id)));
+            var parking = _repo.GetParkingById(id);
+            if (parking != null) {
+                return Ok(_map.Map<ParkingReadDto>(parking));
+            }
+            return NotFound();
         }
 
         // POST api/<ParkingController>
         [HttpPost]
-        public ActionResult AddParking(ParkingWriteDto p)
+        public ActionResult<Parking> AddParking(ParkingWriteDto p)
         {
             var parking = _map.Map<Parking>(p);
 
             _repo.AddParking(parking);
             _repo.SaveChanges();
 
-            return Ok(parking);
+            return CreatedAtRoute(nameof(GetParkingById), new {id = parking.id}, parking);
         }
 
         // PUT api/<ParkingController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<Parking> Put(int id, ParkingWriteDto p)
         {
+            var parking = _map.Map<Parking>(p);
+            
+            parking.id = id;
+
+            _repo.UpdateParking(parking);
+            _repo.SaveChanges();
+
+            return Ok(parking);
         }
 
         // DELETE api/<ParkingController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            var parking = _repo.GetParkingById(id);
+            if (parking == null) {
+                return NotFound();
+            }
+            
+            _repo.DeleteParking(parking);
+            _repo.SaveChanges();
+
+            return Ok();
         }
     }
 }

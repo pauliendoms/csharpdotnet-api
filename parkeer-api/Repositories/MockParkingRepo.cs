@@ -33,5 +33,15 @@
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateParking(Parking parking)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteParking(Parking parking)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
