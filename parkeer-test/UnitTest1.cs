@@ -17,7 +17,6 @@ public class TestData : IEnumerable<object[]>
     
 public class UnitTest1
 {
-    // test if we get the same object after we just created it with a post request
     [Theory]
     [ClassData(typeof(TestData))]
     public async void TestParkingModel(int i, int cap, int free, int city)

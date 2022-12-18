@@ -1,12 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace parkeer_test;
 
-namespace parkeer_test
+using parkeer_api;
+using System.Collections;
+
+public class TestData2 : IEnumerable<object[]>
 {
-    internal class UnitTest2
+    public IEnumerator<object[]> GetEnumerator()
     {
+        yield return new object[] { 1, "Leuven" };
+        yield return new object[] { 2, "Mechelen" };
+    }
+
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+}
+
+public class UnitTest2
+{
+    [Theory]
+    [ClassData(typeof(TestData2))]
+    public async void TestStadModel(int i, string n)
+    {
+        var stad = new Stad(id: i, name:n);
+
+        Assert.Equal(n, stad.name);
     }
 }
