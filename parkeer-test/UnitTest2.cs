@@ -20,7 +20,9 @@ public class UnitTest2
     [ClassData(typeof(TestData2))]
     public async void TestStadModel(int i, string n)
     {
-        var stad = new Stad(id: i, name:n);
+        var stad = new Stad();
+        stad._id = i;
+        stad.name = n;
 
         Assert.Equal(n, stad.name);
     }
