@@ -32,7 +32,7 @@ namespace parkeer_api.Controllers
         {
             var stad = _repo.GetStadById(id);
             if(stad != null) {
-                return Ok(_map.Map<ParkingReadDto>(stad));
+                return Ok(_map.Map<StadReadDto>(stad));
             }
             return NotFound();
         }
@@ -79,6 +79,23 @@ namespace parkeer_api.Controllers
             _repo.SaveChanges();
 
             return Ok();
+        }
+
+        [HttpGet("parkings")]
+        public ActionResult<List<List<Parking>>> Parkings()
+        {
+            List<List<Parking>> parkingsPerStad = new List<List<Parking>>();
+            var steden = _repo.GetSteden().ToList<Stad>();
+
+            foreach (var stad in steden)
+            {
+                var parkings = _repo.GetParkingsByStad(stad.id).ToList<Parking>();
+                parkingsPerStad.Add(parkings);   
+            }
+
+            return Ok(parkingsPerStad);
+
+
         }
     }
 }

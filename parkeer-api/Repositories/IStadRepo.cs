@@ -9,5 +9,7 @@ namespace parkeer_api.Repositories
         void SaveChanges();
         void UpdateStad(Stad stad);
         void DeleteStad(Stad stad);
+
+        IEnumerable<Parking> GetParkingsByStad(int city_id);
     }
 }

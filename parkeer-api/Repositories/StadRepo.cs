@@ -20,6 +20,11 @@ namespace parkeer_api.Repositories
             _context.steden.Remove(stad);
         }
 
+        public IEnumerable<Parking> GetParkingsByStad(int city_id)
+        {
+            return _context.parkings.Where(a => a.city_id == city_id);
+        }
+
         public Stad GetStadById(int id)
         {
             return _context.steden.FirstOrDefault<Stad>(t => t.id == id);
@@ -38,5 +43,7 @@ namespace parkeer_api.Repositories
         public void UpdateStad(Stad stad)
         {
         }
+
+        
     }
 }
