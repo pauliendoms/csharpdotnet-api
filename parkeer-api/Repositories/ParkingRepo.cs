@@ -30,6 +30,16 @@ namespace parkeer_api.Repositories
         {
             _context.SaveChanges();
         }
+
+        public void UpdateParking(Parking parking)
+        {
+            _context.parkings.Update(parking);
+        }
+
+        public void DeleteParking(Parking parking)
+        {
+            _context.parkings.Remove(parking);
+        }
     }
 
 }

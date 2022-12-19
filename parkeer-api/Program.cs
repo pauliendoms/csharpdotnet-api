@@ -12,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IParkingRepo, ParkingRepo>();
+builder.Services.AddScoped<IStadRepo, StadRepo>();
 
 String _constr = builder.Configuration["ConnectionStrings:DefaultConnection"];
 
